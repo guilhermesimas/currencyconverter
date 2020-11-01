@@ -1,5 +1,6 @@
 package com.cortex.currencyconverter.controllers;
 
+import com.cortex.currencyconverter.contracts.ConversionResultTO;
 import com.cortex.currencyconverter.services.ConverterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ public class CurrencyController {
     private final ConverterService converterService;
 
     @GetMapping("convert")
-    public ResponseEntity<String> convertCurrency(){
-        return ResponseEntity.ok(converterService.convert());
+    public ResponseEntity<ConversionResultTO> convertCurrency(){
+        return ResponseEntity.ok(new ConversionResultTO(converterService.convert()));
     }
 }

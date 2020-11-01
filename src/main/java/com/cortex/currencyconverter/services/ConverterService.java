@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ConverterService {
     private final BacenClient bacenClient;
-    public String convert(){
+    public Double convert(){
         ConversionTO conversionTO = bacenClient.convert(100.0f, 978, 220, "2020-10-20").getBody();
-        return conversionTO.getConvertedValue().toString();
+        return conversionTO.getConvertedValue();
     }
 }

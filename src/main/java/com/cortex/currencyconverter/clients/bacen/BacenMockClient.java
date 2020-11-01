@@ -1,13 +1,12 @@
 package com.cortex.currencyconverter.clients.bacen;
 
 import com.cortex.currencyconverter.clients.bacen.contracts.ConversionTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.netflix.ribbon.StaticServerList;
@@ -22,11 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Profile({"!production"})
 @RestController
-@RibbonClient(value = "bacen", configuration = BacenMockClient.RibbonConfig.class)
+@RibbonClient(value = "bacen", configuration = {BacenMockClient.RibbonConfig.class})
 @RequiredArgsConstructor
 public class BacenMockClient {
-
-    private final ObjectMapper objectMapper;
 
     @Profile({"!production"})
     @Configuration
@@ -45,15 +42,14 @@ public class BacenMockClient {
 
     @GetMapping(value="/bc_moeda/rest/converter/{amount}/1/{from}/{to}/{when}")
     @SneakyThrows
-    ResponseEntity<ConversionTO> convert(@PathVariable("amount") Float amount,
+    ResponseEntity<String> convert(@PathVariable("amount") Float amount,
                                          @PathVariable("from") Integer from,
                                          @PathVariable( "to") Integer to,
                                          @PathVariable("when") String when){
-        return ResponseEntity.ok(objectMapper.readValue("" +
+        return ResponseEntity.ok("" +
                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<ConversionTO>" +
                 "<valor-convertido>154.1405110</valor-convertido>" +
-                "</ConversionTO>", ConversionTO.class));
+                "");
     }
 
     @GetMapping(value="/bc_moeda/rest/moeda/data")

@@ -1,21 +1,19 @@
 package com.cortex.currencyconverter.contract;
 
+import com.cortex.currencyconverter.clients.bacen.BacenClientConfig;
 import com.cortex.currencyconverter.clients.bacen.contracts.ConversionTO;
 import com.cortex.currencyconverter.clients.bacen.contracts.CurrencyTO;
 import com.cortex.currencyconverter.clients.bacen.contracts.ListCurrencyTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class BacenContractTest {
 
-    @Autowired
-    ObjectMapper objectMapper;
-
+    XmlMapper objectMapper = BacenClientConfig.xmlMapper();
 
     @Test
     @SneakyThrows

@@ -15,9 +15,4 @@ public class CurrencyconverterApplication {
 		SpringApplication.run(CurrencyconverterApplication.class, args);
 	}
 
-	@Bean
-	ObjectMapper objectMapper() {
-		return new XmlMapper();
-	}
-
 }
