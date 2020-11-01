@@ -1,7 +1,5 @@
 package com.cortex.currencyconverter.clients.bacen;
 
-import com.cortex.currencyconverter.clients.bacen.contracts.ConversionTO;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +51,7 @@ public class BacenMockClient {
     }
 
     @GetMapping(value="/bc_moeda/rest/moeda/data")
-    ResponseEntity<String> getCurrency() {
+    ResponseEntity<String> listCurrencies() {
        return ResponseEntity.ok("" +
                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                "<moedas>\n" +

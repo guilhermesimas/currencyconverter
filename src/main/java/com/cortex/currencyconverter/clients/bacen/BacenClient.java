@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface BacenClient {
 
     @GetMapping(value="/bc_moeda/rest/moeda/data")
-    ResponseEntity<ListCurrencyTO> getCurrency();
+    ResponseEntity<ListCurrencyTO> listCurrencies();
 
     @GetMapping(value="/bc_moeda/rest/converter/{amount}/1/{from}/{to}/{when}")
-    ResponseEntity<ConversionTO> convert(@PathVariable("amount") Float amount,
+    ResponseEntity<ConversionTO> convert(@PathVariable("amount") Double amount,
                                          @PathVariable("from") Integer from,
                                          @PathVariable( "to") Integer to,
                                          @PathVariable("when") String when);
