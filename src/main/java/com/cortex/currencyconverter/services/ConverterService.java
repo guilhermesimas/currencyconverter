@@ -5,6 +5,7 @@ import com.cortex.currencyconverter.clients.bacen.contracts.ConversionTO;
 import com.cortex.currencyconverter.clients.bacen.contracts.CurrencyTO;
 import com.cortex.currencyconverter.clients.bacen.contracts.ListCurrencyTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ public class ConverterService {
 
     private final BacenClient bacenClient;
 
+    @Cacheable("conversion")
     public Double convert(Double amount, String from, String to, LocalDate when){
         Map<String, Integer> currencies = listCurrencies();
         Integer fromCurrencyCode = currencies.get(from);
@@ -25,6 +27,7 @@ public class ConverterService {
         return conversionTO.getConvertedValue();
     }
 
+    @Cacheable("currencies")
     public Map<String, Integer> listCurrencies() {
         ListCurrencyTO listCurrency = bacenClient.listCurrencies().getBody();
         return listCurrency.getCurrencies().stream().collect(Collectors.toMap(CurrencyTO::getInitials,
