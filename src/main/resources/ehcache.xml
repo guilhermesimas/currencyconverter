@@ -18,7 +18,6 @@
     </cache>
     <cache alias="conversion">
         <key-type>org.springframework.cache.interceptor.SimpleKey</key-type>
-        <value-type>java.lang.Double</value-type>
         <expiry>
             <ttl unit="seconds">10</ttl>
         </expiry>

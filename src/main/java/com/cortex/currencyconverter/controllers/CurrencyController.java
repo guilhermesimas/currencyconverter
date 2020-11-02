@@ -1,6 +1,7 @@
 package com.cortex.currencyconverter.controllers;
 
 import com.cortex.currencyconverter.contracts.ConversionResultTO;
+import com.cortex.currencyconverter.entities.CacheableConversion;
 import com.cortex.currencyconverter.services.ConverterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,8 +23,10 @@ public class CurrencyController {
                                                               @PathVariable("from") String from,
                                                               @PathVariable("to") String to,
                                                               @PathVariable("when") String when){
-        return ResponseEntity.ok(new ConversionResultTO(converterService.convert(amount, from, to ,
-                LocalDate.parse(when))));
+        final LocalDate dateStr = LocalDate.parse(when);
+        CacheableConversion cacheableConversion = converterService.convert(amount, from, to , dateStr);
+        converterService.setResultAsCached(amount, from, to, dateStr, cacheableConversion);
+        return ResponseEntity.ok(ConversionResultTO.of(cacheableConversion));
     }
 
     @GetMapping("currencies")
