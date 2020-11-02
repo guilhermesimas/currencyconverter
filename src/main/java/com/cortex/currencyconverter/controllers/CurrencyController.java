@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -27,7 +28,7 @@ public class CurrencyController {
     }
 
     @GetMapping("currencies")
-    public ResponseEntity<Map<String, Integer>> listCurrencies(){
+    public ResponseEntity<HashMap<String, Integer>> listCurrencies(){
         return ResponseEntity.ok(converterService.listCurrencies());
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -36,10 +37,13 @@ public class ConverterService {
     }
 
     @Cacheable("currencies")
-    public Map<String, Integer> listCurrencies() {
+    public HashMap<String, Integer> listCurrencies() {
         ListCurrencyTO listCurrency = bacenClient.listCurrencies().getBody();
-        return listCurrency.getCurrencies().stream().collect(Collectors.toMap(CurrencyTO::getInitials,
-                CurrencyTO::getCode));
+        return  listCurrency.getCurrencies().stream().collect(Collectors.toMap(
+                CurrencyTO::getInitials,
+                CurrencyTO::getCode,
+                (o1, o2) -> o1,
+                HashMap::new));
 
     }
 }
