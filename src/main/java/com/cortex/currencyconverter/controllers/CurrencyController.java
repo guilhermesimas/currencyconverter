@@ -2,6 +2,7 @@ package com.cortex.currencyconverter.controllers;
 
 import com.cortex.currencyconverter.contracts.ConversionResultTO;
 import com.cortex.currencyconverter.entities.CacheableConversion;
+import com.cortex.currencyconverter.facades.ConverterFacade;
 import com.cortex.currencyconverter.services.ConverterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +22,7 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class CurrencyController {
 
-    private final ConverterService converterService;
+    private final ConverterFacade converterFacade;
 
     @ApiOperation(value = "Consultar conversão de moeda em data específica.")
     @ApiResponses({
@@ -38,12 +39,7 @@ public class CurrencyController {
             @ApiParam("Moeda de destino.") @PathVariable("to") String to,
             @ApiParam("Data de referência para conversão. Deve ser no formato YYYY-MM-DD")
             @PathVariable("when") String when){
-        final LocalDate dateStr = LocalDate.parse(when);
-        CacheableConversion cacheableConversion = converterService.convert(amount, from, to , dateStr);
-        if(cacheableConversion.getFromCache() == false) {
-            converterService.setResultAsCached(amount, from, to, dateStr, cacheableConversion);
-        }
-        return ResponseEntity.ok(ConversionResultTO.of(cacheableConversion));
+        return ResponseEntity.ok(ConversionResultTO.of(converterFacade.convert(amount, from, to, when)));
     }
 
     @ApiOperation(value = "Consultar moedas disponíveis para conversão.")
@@ -54,6 +50,6 @@ public class CurrencyController {
     })
     @GetMapping("currencies")
     public ResponseEntity<HashMap<String, Integer>> listCurrencies(){
-        return ResponseEntity.ok(converterService.listCurrencies());
+        return ResponseEntity.ok(converterFacade.listCurrencies());
     }
 }
