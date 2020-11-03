@@ -19,7 +19,7 @@ public class ExceptionHandlingAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     private HttpErrorTO persistenceExceptionHandler(DateTimeParseException ex) {
-        return new HttpErrorTO("Invalid datetime format.");
+        return new HttpErrorTO("Invalid datetime format. Please use YYYY-MM-DD.");
     }
 
     @ExceptionHandler(InvalidCurrency.class)
