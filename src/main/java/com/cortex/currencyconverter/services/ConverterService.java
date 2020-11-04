@@ -6,7 +6,6 @@ import com.cortex.currencyconverter.clients.bacen.contracts.CurrencyTO;
 import com.cortex.currencyconverter.clients.bacen.contracts.ListCurrencyTO;
 import com.cortex.currencyconverter.entities.CacheableConversion;
 import com.cortex.currencyconverter.exceptions.InvalidCurrency;
-import com.cortex.currencyconverter.services.keygenerators.ConversionKeyGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

@@ -1,10 +1,7 @@
 package com.cortex.currencyconverter.controllers;
 
 import com.cortex.currencyconverter.contracts.ConversionResultTO;
-import com.cortex.currencyconverter.entities.CacheableConversion;
 import com.cortex.currencyconverter.facades.ConverterFacade;
-import com.cortex.currencyconverter.services.ConverterService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 
 @RestController

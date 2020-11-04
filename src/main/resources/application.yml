@@ -7,8 +7,3 @@ ribbon:
   eager-load:
     enabled: true
     clients: bacen
-
-spring:
-  cache:
-    jcache:
-      config: classpath:ehcache.xml
