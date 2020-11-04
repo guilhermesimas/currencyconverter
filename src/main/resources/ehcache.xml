@@ -9,7 +9,7 @@
         <key-type>org.springframework.cache.interceptor.SimpleKey</key-type>
         <value-type>java.util.HashMap</value-type>
         <expiry>
-            <ttl unit="seconds">30</ttl>
+            <ttl unit="minutes">30</ttl>
         </expiry>
         <resources>
             <heap unit="entries">2</heap>
@@ -19,7 +19,7 @@
     <cache alias="conversion">
         <key-type>org.springframework.cache.interceptor.SimpleKey</key-type>
         <expiry>
-            <ttl unit="seconds">10</ttl>
+            <ttl unit="hours">1</ttl>
         </expiry>
         <resources>
             <heap unit="entries">2</heap>
