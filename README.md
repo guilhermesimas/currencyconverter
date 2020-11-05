@@ -71,7 +71,7 @@ Como as moedas passadas no path da conversão se originam do próprio serviço d
 Atendendo ao exercício, fiz um diagrama com uma proposta de escalabilidade do serviço, implementando um sistema assíncrono de requisições
 utilizando filas com prioridade.
 
-![Diagrama de proposta de escalabilidade](docs/scalability-proposal.pdf)
+![Diagrama de proposta de escalabilidade](docs/scalability-proposal.jpg)
 
 Para atender a um sistema de requisições assíncrono enfileirado, proponho 2 filas (de forma a separar as requisições de alta prioridade),
  nesse caso SQSs, subscritas a um tópico (SNS) que recebe postagens dos consumidores do serviço. A filtragem seria realizada com base em um
